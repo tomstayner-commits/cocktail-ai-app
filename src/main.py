@@ -1,24 +1,97 @@
 from fastapi import FastAPI
+from fastapi.responses import HTMLResponse
 
 app = FastAPI()
 
-@app.get("/")
-def root():
-    return {
-        "message": "Welcome to Tom's Cocktail API"
-    }
-
-@app.get("/cocktails")
-def get_cocktails():
-    return [
+cocktails =    [
         {
             "id": 1,
             "name": "Old Fashioned",
-            "spirit": "Bourbon"
+            "spirit": "Bourbon",
+            "ingredients": [
+                "60ml Bourbon",
+                "1 Sugar Cube",
+                "2 Dashes Angostura Bitters"
+            ]
         },
         {
             "id": 2,
             "name": "Negroni",
-            "spirit": "Gin"
+            "spirit": "Gin",
+            "ingredients": [
+                "30ml Gin",
+                "30ml Campari",
+                "30ml Sweet Vermouth"
+            ]
+        },
+        {
+            "id": 3,
+            "name": "Margarita",
+            "spirit": "Tequila",
+            "ingredients": [
+                "50ml Tequila",
+                "25ml Triple Sec",
+                "25ml Lime Juice"
+            ]
         }
     ]
+
+@app.get("/", response_class=HTMLResponse)
+def root():
+    cocktail_count = len(cocktails)
+    return f"""
+    <html>
+    <head>
+        <title>Tom's Cocktail API</title>
+
+        <style>
+            body {{
+                font-family: Arial, sans-serif;
+            }}
+
+            h1 {{
+                color: #8B0000;
+            }}
+
+            .card {{
+                background: white;
+            }}
+        </style>
+    </head>
+    <body>
+        <div class="card">
+            <h1>🍸 Tom's Cocktail API</h1>
+
+            <p>
+                A simple REST API built with Python and FastAPI.
+            </p>
+            <p>
+                Currently serving {cocktail_count} cocktails.
+            </p>
+            <h2>Available Endpoints</h2>
+
+            <ul>
+                <li><a href="/cocktails">GET /cocktails</a></li>
+                <li><a href="/docs">Swagger Documentation</a></li>
+            </ul>
+
+            <p>
+                Running locally on FastAPI 🚀
+            </p>
+        </div>
+    </body>
+    </html>
+    """
+
+@app.get("/cocktails")
+def get_cocktails():
+    return cocktails
+
+@app.get("/cocktails/{cocktail_id}")
+def get_cocktail(cocktail_id: int):
+
+    for cocktail in cocktails:
+        if cocktail["id"] == cocktail_id:
+            return cocktail
+
+    return {"error": "Cocktail not found"}
