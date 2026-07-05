@@ -1,3 +1,7 @@
+# =====================================================
+# Imports
+# =====================================================
+
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
 from pydantic import BaseModel
@@ -6,12 +10,27 @@ from fastapi.staticfiles import StaticFiles
 import boto3
 import logging
 
+# =====================================================
+# Logging Configuration
+# =====================================================
+
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s | %(levelname)-8s | %(name)s | %(message)s"
 )
 
 logger = logging.getLogger(__name__)
+
+# =====================================================
+# Application Configuration
+# =====================================================
+
+AWS_REGION = "ap-southeast-2"
+TABLE_NAME = "Cocktails"
+
+# =====================================================
+# FastAPI Application
+# =====================================================
 
 app = FastAPI(
     title="Tom's Cocktail API",
@@ -29,11 +48,19 @@ app = FastAPI(
         version="0.2.0"
 )
 
+# =====================================================
+# Static Files
+# =====================================================
+
 app.mount(
     "/static",
     StaticFiles(directory="static"),
     name="static"
 )
+
+# =====================================================
+# Helper Functions
+# =====================================================
 
 def render_page(title: str, content: str) -> HTMLResponse:
     return HTMLResponse(f"""
@@ -60,30 +87,53 @@ def render_page(title: str, content: str) -> HTMLResponse:
     </html>
     """)
 
+# =====================================================
+# Data Models
+# =====================================================
+
 class Cocktail(BaseModel):
     id: int
     name: str
     spirit: str
     ingredients: list[str]
 
+# =====================================================
+# Database Connection
+# =====================================================
+
 dynamodb = boto3.resource(
     "dynamodb",
-    region_name="ap-southeast-2"
+    region_name=AWS_REGION
 )
 
-table = dynamodb.Table("Cocktails")
+table = dynamodb.Table(TABLE_NAME)
 
-logger.info("Cocktail API starting")
-logger.info("Connected to DynamoDB table 'Cocktails'")
+# =====================================================
+# Application Startup
+# =====================================================
+
+logger.info("[SYSTEM] Cocktail API starting")
+logger.info(
+    f"[SYSTEM] AWS Region: {AWS_REGION}"
+)
+logger.info(
+    f"[SYSTEM] Connected to DynamoDB table '{TABLE_NAME}'"
+)
+
+# =====================================================
+# HTML Routes
+# =====================================================
 
 @app.get("/", response_class=HTMLResponse)
-def root():
+def root() -> HTMLResponse:
 
     logger.info("[HTML] Rendering home page")
     response = table.scan()
     cocktails = response["Items"]
     cocktail_count = len(cocktails)
-    logger.info(f"[HTML] Rendered home page with {len(cocktails)} cocktails")
+    logger.info(
+        f"[HTML] Rendered home page with {cocktail_count} cocktails"
+    )
 
     cocktail_list = ""
 
@@ -128,34 +178,23 @@ def root():
 
     return render_page("Tom's Cocktail API", content)
 
-@app.get("/cocktails")
-def get_cocktails():
-
-    logger.info("[API] Retrieving cocktail collection")
-
-    response = table.scan()
-    cocktails = response["Items"]
-
-    logger.info(
-        f"[API] Returned {len(cocktails)} cocktails"
-    )
-
-    return cocktails
-
 @app.get("/cocktails/html", response_class=HTMLResponse)
-def cocktails_html():
+def cocktails_html() -> HTMLResponse:
 
     logger.info("[HTML] Rendering cocktail library")
 
     response = table.scan()
 
+    cocktails = response["Items"]
+    cocktail_count = len(cocktails)
+
     logger.info(
-        f"[HTML] Rendered cocktail library with {len(response['Items'])} cocktails"
+        f"[HTML] Rendered cocktail library with {cocktail_count} cocktails"
     )
 
     rows = ""
 
-    for cocktail in response["Items"]:
+    for cocktail in cocktails:
         rows += f"""
         <tr>
             <td>{cocktail["id"]}</td>
@@ -190,9 +229,11 @@ def cocktails_html():
     return render_page("Cocktails", content)
 
 @app.get("/cocktails/html/{cocktail_id}", response_class=HTMLResponse)
-def cocktail_html(cocktail_id: int):
+def cocktail_html(cocktail_id: int) -> HTMLResponse:
 
-    logger.info(f"HTML - Loading cocktail page {cocktail_id}")
+    logger.info(
+        f"[HTML] Rendering cocktail page (ID {cocktail_id})"
+    )
 
     response = table.get_item(
         Key={"id": cocktail_id}
@@ -201,14 +242,16 @@ def cocktail_html(cocktail_id: int):
     item = response.get("Item")
 
     if not item:
-        logger.warning(f"HTML - Cocktail {cocktail_id} not found")
+        logger.warning(
+            f"[HTML] Cocktail ID {cocktail_id} not found"
+        )
         raise HTTPException(
             status_code=404,
             detail="Cocktail not found"            
         )
     
     logger.info(
-        f"HTML - Displaying '{item['name']}' (ID {cocktail_id})"
+        f"[HTML] Rendered cocktail '{item['name']}' (ID {cocktail_id})"
     )
 
     ingredients = ""
@@ -238,8 +281,26 @@ def cocktail_html(cocktail_id: int):
 
     return render_page(item["name"], content)
 
+# =====================================================
+# JSON API Routes
+# =====================================================
+
+@app.get("/cocktails")
+def get_cocktails() -> list:
+
+    logger.info("[API] Retrieving cocktail collection")
+
+    response = table.scan()
+    cocktails = response["Items"]
+
+    logger.info(
+        f"[API] Returned {len(cocktails)} cocktails"
+    )
+
+    return cocktails
+
 @app.get("/cocktails/{cocktail_id}")
-def get_cocktail(cocktail_id: int):
+def get_cocktail(cocktail_id: int) -> dict:
 
     logger.info(
         f"[API] Retrieving cocktail (ID {cocktail_id})"
@@ -254,7 +315,9 @@ def get_cocktail(cocktail_id: int):
     item = response.get("Item")
 
     if not item:
-        logger.warning(f"Cocktail {cocktail_id} not found")
+        logger.warning(
+            f"[API] Cocktail ID {cocktail_id} not found"
+        )
         raise HTTPException(
             status_code=404,
             detail="Cocktail not found"
