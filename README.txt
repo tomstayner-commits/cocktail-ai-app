@@ -6,10 +6,10 @@ Cocktail AI Application
 
         Activate the virtual environment.
             Windows PowerShell:
-            ..venv\Scripts\Activate.ps1
+                ..venv\Scripts\Activate.ps1
 
             Windows Command Prompt:
-            .venv\Scripts\activate.bat
+                .venv\Scripts\activate.bat
 
         Ensure you are in the project root directory.
 
