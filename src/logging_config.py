@@ -1,7 +1,6 @@
 import logging
 from pathlib import Path
 
-# Create the logs directory if it doesn't already exist
 LOG_DIR = Path("logs")
 LOG_DIR.mkdir(exist_ok=True)
 
@@ -16,8 +15,10 @@ logging.basicConfig(
     ],
 )
 
-root_logger = logging.getLogger("cocktail_api")
-root_logger.setLevel(logging.INFO)
+# Suppress noisy third-party libraries
+logging.getLogger("botocore").setLevel(logging.WARNING)
+logging.getLogger("boto3").setLevel(logging.WARNING)
+logging.getLogger("urllib3").setLevel(logging.WARNING)
 
-logger = logging.getLogger("cocktail_api")
-logger.propagate = False
+# Application logger
+logger = logging.getLogger()

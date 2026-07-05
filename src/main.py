@@ -3,19 +3,13 @@
 # =====================================================
 
 from fastapi import FastAPI
-from fastapi.responses import HTMLResponse
-from pydantic import BaseModel
 from fastapi import HTTPException
+from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
+from pydantic import BaseModel
+
+from src.database import table
 from src.logging_config import logger
-import boto3
-
-# =====================================================
-# Application Configuration
-# =====================================================
-
-AWS_REGION = "ap-southeast-2"
-TABLE_NAME = "Cocktails"
 
 # =====================================================
 # FastAPI Application
@@ -87,27 +81,10 @@ class Cocktail(BaseModel):
     ingredients: list[str]
 
 # =====================================================
-# Database Connection
-# =====================================================
-
-dynamodb = boto3.resource(
-    "dynamodb",
-    region_name=AWS_REGION
-)
-
-table = dynamodb.Table(TABLE_NAME)
-
-# =====================================================
-# Application Startup
+# Application Initialization
 # =====================================================
 
 logger.info("[SYSTEM] Cocktail API starting")
-logger.info(
-    f"[SYSTEM] AWS Region: {AWS_REGION}"
-)
-logger.info(
-    f"[SYSTEM] Connected to DynamoDB table '{TABLE_NAME}'"
-)
 
 # =====================================================
 # HTML Routes
@@ -320,7 +297,7 @@ def get_cocktail(cocktail_id: int) -> dict:
     return item
 
 @app.post("/cocktails")
-def create_cocktail(cocktail: Cocktail):
+def create_cocktail(cocktail: Cocktail) -> dict:
 
     logger.info(
         f"[API] Creating cocktail '{cocktail.name}' (ID {cocktail.id})"
@@ -344,7 +321,7 @@ def create_cocktail(cocktail: Cocktail):
     }
 
 @app.delete("/cocktails/{cocktail_id}")
-def delete_cocktail(cocktail_id: int):
+def delete_cocktail(cocktail_id: int) -> dict:
 
     logger.info(
         f"[API] Deleting cocktail ID {cocktail_id}"
@@ -381,7 +358,7 @@ def delete_cocktail(cocktail_id: int):
 def update_cocktail(
     cocktail_id: int,
     cocktail: Cocktail
-):
+) -> dict:
 
     logger.info(
         f"[API] Updating cocktail ID {cocktail_id}"
