@@ -5,30 +5,27 @@ Cocktail AI Application
         Open a new terminal.
 
         Activate the virtual environment.
+            Windows PowerShell:
+            ..venv\Scripts\Activate.ps1
 
-        Windows PowerShell:
-        ..venv\Scripts\Activate.ps1
-
-        Windows Command Prompt:
-        .venv\Scripts\activate.bat
+            Windows Command Prompt:
+            .venv\Scripts\activate.bat
 
         Ensure you are in the project root directory.
 
         Start the application.
+            Command Line Application:
+            python src/main.py
 
-        Weeks 1–2 (Command Line Application):
-        python src/main.py
+            FastAPI Web Application:
+            uvicorn src.main --reload
 
-        Week 3+ (FastAPI Web Application):
-        uvicorn src.main --reload
-
-        Open your browser (Week 3+).
-
-        http://localhost:8000
+        Open your browser
+            http://localhost:8000
 
         FastAPI Interactive API Documentation:
+            http://localhost:8000/docs
 
-        http://localhost:8000/docs
     Notes
         If using FastAPI, ensure app = FastAPI() exists in src/main.py.
         If using a different project structure (for example app/ instead of src/), adjust the Uvicorn command accordingly.
@@ -38,7 +35,8 @@ Cocktail AI Application
         This application integrates with external cloud-hosted services.
 
     Database
-        The application uses a cloud-hosted database. A valid connection string or credentials must be configured before the application can access the database.
+        The application uses a cloud-hosted Dynamo database.
+        A valid connection string or credentials must be configured before the application can access the database.
         Connection details are supplied through environment variables and are not stored in this repository.
         Example:
         DATABASE_URL=<your database connection string>
