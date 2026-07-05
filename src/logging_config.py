@@ -16,4 +16,8 @@ logging.basicConfig(
     ],
 )
 
+root_logger = logging.getLogger("cocktail_api")
+root_logger.setLevel(logging.INFO)
+
 logger = logging.getLogger("cocktail_api")
+logger.propagate = False
