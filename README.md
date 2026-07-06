@@ -42,15 +42,26 @@ Current features include:
 
 ## 🚧 Project Status
 
-This project is under active development.
+This project is under active development as part of my Cloud & AI Engineering learning journey.
 
-Planned enhancements include:
+### Current Focus
+
+- REST API development with FastAPI
+- AWS DynamoDB integration
+- Structured logging
+- HTML web interface
+- Project modularisation and code refactoring
+
+### Planned Enhancements
 
 - Docker support
-- AWS deployment
+- AWS cloud deployment
 - CI/CD pipeline
 - AI-powered cocktail recommendations
-- Automated testing
+- Automated testing with pytest
+- Improved exception and error handling
+- Environment-based configuration
+- Service layer architecture
 
 ---
 
