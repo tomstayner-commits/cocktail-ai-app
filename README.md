@@ -53,3 +53,25 @@ Cocktail AI Application
         API keys, passwords and connection strings must never be committed to Git.
         Sensitive configuration should be stored in a local .env file or a cloud-based secrets manager.
         A .env.example file should be provided to document the required variables without exposing sensitive values.
+
+    Configuration
+        Create a `.env` file in the project root.
+
+        Example:
+        ```text
+        AWS_REGION=ap-southeast-2
+        TABLE_NAME=Cocktails
+        LOG_LEVEL=INFO
+        ```
+
+        Alternatively, copy `.env.example`:
+
+        ```bash
+        cp .env.example .env
+        ```
+
+        or on Windows:
+
+        ```powershell
+        Copy-Item .env.example .env
+        ```

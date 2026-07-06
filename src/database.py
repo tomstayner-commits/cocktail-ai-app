@@ -1,8 +1,12 @@
 import boto3
 from src.logging_config import logger
+from dotenv import load_dotenv
+import os
 
-AWS_REGION = "ap-southeast-2"
-TABLE_NAME = "Cocktails"
+load_dotenv()
+
+AWS_REGION = os.getenv("AWS_REGION")
+TABLE_NAME = os.getenv("TABLE_NAME")
 
 dynamodb = boto3.resource(
     "dynamodb",
