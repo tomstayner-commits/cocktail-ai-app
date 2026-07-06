@@ -1,17 +1,60 @@
-## Project Status
+# 🍸 Cocktail AI App
 
-🚧 Currently under active development.
+A cloud-native cocktail recipe application built with **Python**, **FastAPI**, and **AWS DynamoDB**.
 
-This personal project is part of my Cloud & AI Engineering learning journey to put into practice my Cloud Development learnings.
+This project forms part of my **Cloud & AI Engineering** learning journey and is designed to put cloud development concepts into practice while building a real-world application.
 
-Upcoming work includes:
+Current features include:
+
+- REST API built with FastAPI
+- HTML web interface
+- AWS DynamoDB backend
+- Structured application logging
+- Interactive Swagger API documentation
+
+---
+
+## Technologies
+
+- Python 3.14
+- FastAPI
+- AWS DynamoDB
+- Boto3
+- Uvicorn
+- HTML / CSS
+- Git & GitHub
+
+---
+
+## Architecture
+
+```text
+            Browser
+               │
+               ▼
+      FastAPI (Uvicorn)
+               │
+               ▼
+      AWS DynamoDB Table
+```
+
+---
+
+## 🚧 Project Status
+
+This project is under active development.
+
+Planned enhancements include:
 
 - Docker support
 - AWS deployment
-- CI/CD
+- CI/CD pipeline
 - AI-powered cocktail recommendations
+- Automated testing
 
-# Running the Application
+---
+
+# Getting Started
 
 ## 1. Activate the Virtual Environment
 
@@ -27,11 +70,7 @@ Upcoming work includes:
 .venv\Scripts\activate.bat
 ```
 
----
-
-## 2. Ensure You Are in the Project Root Directory
-
-Example:
+## 2. Navigate to the Project Root
 
 ```text
 cocktail-ai-app/
@@ -42,59 +81,13 @@ cocktail-ai-app/
 └── ...
 ```
 
----
-
-## 3. Start the Application
-
-### FastAPI Web Application
+## 3. Install Dependencies
 
 ```powershell
-uvicorn src.main:app --reload
+pip install -r requirements.txt
 ```
 
-> **Note:** `python src/main.py` can be useful for simple testing, but the application is intended to be run using Uvicorn.
-
----
-
-## 4. Open the Application
-
-Application Home Page:
-
-```text
-http://localhost:8000
-```
-
-Interactive API Documentation (Swagger UI):
-
-```text
-http://localhost:8000/docs
-```
-
----
-
-# Notes
-
-- Ensure the virtual environment is activated before running the application.
-- Ensure `app = FastAPI()` exists in `src/main.py`.
-- If using a different project structure (for example `app/` instead of `src/`), adjust the Uvicorn command accordingly.
-
----
-
-# External Dependencies
-
-This application integrates with cloud-hosted AWS services.
-
-## Database
-
-The application stores cocktail data in an AWS DynamoDB table.
-
-A valid AWS configuration must be available before the application can access the database.
-
-Configuration is supplied through environment variables and is **not** stored in this repository.
-
----
-
-# Configuration
+## 4. Configure the Application
 
 Create a `.env` file in the project root.
 
@@ -106,9 +99,9 @@ TABLE_NAME=Cocktails
 LOG_LEVEL=INFO
 ```
 
-Alternatively, copy the provided template.
+Or copy the provided template.
 
-### Windows PowerShell
+### Windows
 
 ```powershell
 Copy-Item .env.example .env
@@ -120,28 +113,74 @@ Copy-Item .env.example .env
 cp .env.example .env
 ```
 
+## 5. Run the Application
+
+```powershell
+uvicorn src.main:app --reload
+```
+
+> `python src/main.py` can be useful for simple testing, however the application is intended to be run using Uvicorn.
+
+## 6. Open Your Browser
+
+Application
+
+```text
+http://localhost:8000
+```
+
+Swagger Documentation
+
+```text
+http://localhost:8000/docs
+```
+
 ---
 
-# Environment Variables
+## Requirements
+
+- Python 3.14+
+- Activated virtual environment
+- AWS credentials configured locally
+- Access to the DynamoDB table
+- `app = FastAPI()` defined in `src/main.py`
+
+If your project structure differs (for example `app/` instead of `src/`), adjust the Uvicorn command accordingly.
+
+---
+
+## External Dependencies
+
+This application integrates with AWS cloud services.
+
+### DynamoDB
+
+Cocktail data is stored in an AWS DynamoDB table.
+
+Connection information is supplied through environment variables and is **not** stored in this repository.
+
+---
+
+## Environment Variables
 
 | Variable | Description | Example |
 |----------|-------------|---------|
 | `AWS_REGION` | AWS region containing the DynamoDB table | `ap-southeast-2` |
 | `TABLE_NAME` | DynamoDB table name | `Cocktails` |
-| `LOG_LEVEL` | Logging level | `INFO` |
+| `LOG_LEVEL` | Application logging level | `INFO` |
 
 ---
 
-# Security
+## Security
 
-- Never commit API keys, passwords or credentials to Git.
+- Never commit API keys or passwords.
 - Never commit your `.env` file.
-- Store sensitive configuration in a local `.env` file or a cloud-based secrets manager.
-- The repository includes a `.env.example` file documenting the required configuration without exposing sensitive values.
+- Store secrets in a local `.env` file or a cloud secrets manager.
+- `.env.example` documents the required configuration without exposing sensitive information.
 
 ---
 
-# Project Structure
+## Repository Structure
 
 ```text
 cocktail-ai-app/
