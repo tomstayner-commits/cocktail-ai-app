@@ -118,3 +118,15 @@ If you identify an opportunity to improve these engineering principles:
 - Wait for explicit user approval before making any changes to `AGENTS.md`.
 
 Only recommend changes that improve future engineering across the repository. Do not add feature-specific or temporary guidance.
+
+---
+
+## Documentation Maintenance
+
+When implementing a completed feature:
+
+- Update CHANGELOG.md if the feature changes application behaviour, architecture or developer workflows.
+- Update the roadmap if milestones change.
+- Update architecture documentation if project structure changes.
+- Update setup.md if installation or configuration changes.
+- Keep README concise; avoid duplicating detailed documentation.

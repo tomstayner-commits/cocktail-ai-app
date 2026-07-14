@@ -11,3 +11,14 @@ Use this checklist when completing a feature:
 - Verify the change and summarise what changed, why, and how it was verified.
 
 AI-assisted development follows the same standards and approval requirements. For the full governance rules, see [AGENTS.md](../../AGENTS.md).
+
+## Changelog
+
+All notable user-visible or architectural changes should be recorded in `CHANGELOG.md`.
+
+When completing a feature:
+
+- Update the appropriate version section.
+- Record Added, Changed, Fixed or Removed items.
+- Keep entries concise and user-focused.
+- Do not record trivial formatting or typo-only changes.
