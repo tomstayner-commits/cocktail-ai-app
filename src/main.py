@@ -6,10 +6,10 @@ from fastapi import FastAPI
 from fastapi import HTTPException
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
-from pydantic import BaseModel
-from src.models import Cocktail
+
 from src.database import table
 from src.logging_config import logger
+from src.models import Cocktail
 from src.services import cocktail_service
 
 # =====================================================
@@ -78,8 +78,16 @@ def render_page(title: str, content: str) -> HTMLResponse:
 logger.info("[SYSTEM] Cocktail API starting")
 
 # =====================================================
-# HTML Routes
+# API Health and HTML Routes
 # =====================================================
+
+@app.get("/health")
+def health_check() -> dict[str, str]:
+
+    logger.info("[API] Health check requested")
+
+    return {"status": "ok"}
+
 
 @app.get("/", response_class=HTMLResponse)
 def root() -> HTMLResponse:
@@ -272,22 +280,7 @@ def create_cocktail(cocktail: Cocktail) -> dict:
         f"[API] Creating cocktail '{cocktail.name}' (ID {cocktail.id})"
     )
 
-    table.put_item(
-        Item={
-            "id": cocktail.id,
-            "name": cocktail.name,
-            "spirit": cocktail.spirit,
-            "ingredients": cocktail.ingredients
-        }
-    )
-
-    logger.info(
-        f"[API] Created cocktail '{cocktail.name}'"
-    )
-
-    return {
-        "message": "Cocktail added successfully"
-    }
+    return cocktail_service.create_cocktail(cocktail)
 
 @app.delete("/cocktails/{cocktail_id}")
 def delete_cocktail(cocktail_id: int) -> dict:
@@ -296,32 +289,7 @@ def delete_cocktail(cocktail_id: int) -> dict:
         f"[API] Deleting cocktail ID {cocktail_id}"
     )
 
-    response = table.get_item(
-        Key={"id": cocktail_id}
-    )
-
-    item = response.get("Item")
-
-    if not item:
-        logger.warning(
-            f"[API] Delete failed - cocktail ID {cocktail_id} not found"
-        )
-        raise HTTPException(
-            status_code=404,
-            detail="Cocktail not found"
-        )
-
-    table.delete_item(
-        Key={"id": cocktail_id}
-    )
-
-    logger.info(
-        f"[API] Deleted cocktail '{item['name']}'"
-    )
-
-    return {
-        "message": f"Cocktail {cocktail_id} deleted"
-    }
+    return cocktail_service.delete_cocktail(cocktail_id)
 
 @app.put("/cocktails/{cocktail_id}")
 def update_cocktail(
@@ -333,30 +301,4 @@ def update_cocktail(
         f"[API] Updating cocktail ID {cocktail_id}"
     )
 
-    response = table.get_item(
-        Key={"id": cocktail_id}
-    )
-
-    if "Item" not in response:
-        logger.warning(
-            f"[API] Update failed - cocktail ID {cocktail_id} not found"
-        )
-        raise HTTPException(
-            status_code=404,
-            detail="Cocktail not found"
-        )
-
-    updated_cocktail = {
-        "id": cocktail_id,
-        "name": cocktail.name,
-        "spirit": cocktail.spirit,
-        "ingredients": cocktail.ingredients
-    }
-
-    table.put_item(Item=updated_cocktail)
-
-    logger.info(
-        f"[API] Updated cocktail '{cocktail.name}'"
-    )
-
-    return updated_cocktail
+    return cocktail_service.update_cocktail(cocktail_id, cocktail)

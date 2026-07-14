@@ -8,6 +8,8 @@ Current features include:
 
 - REST API built with FastAPI
 - HTML web interface
+- Service-layer cocktail CRUD logic
+- Health endpoint for monitoring
 - AWS DynamoDB backend
 - Structured application logging
 - Interactive Swagger API documentation
@@ -60,6 +62,7 @@ This project is under active development as part of my Cloud & AI Engineering le
 - Environment-based configuration
 - Improved exception and error handling
 - Automated testing with pytest
+- Deployment health checks and observability
 
 ### Deployment
 
