@@ -105,3 +105,21 @@ Prefer complete solutions over isolated code snippets.
 When appropriate, suggest documentation updates.
 
 Always consider long-term maintainability.
+
+---
+
+Every feature should include:
+
+✓ Documentation
+
+✓ Tests
+
+✓ Logging
+
+✓ Type hints
+
+✓ Error handling
+
+✓ Roadmap update (if required)
+
+✓ Engineering Log update (if required)

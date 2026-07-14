@@ -1,1 +1,0 @@
-Spike: Evaluate GitHub Connector Capabilities
