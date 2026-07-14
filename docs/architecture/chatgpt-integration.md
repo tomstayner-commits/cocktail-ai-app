@@ -232,3 +232,20 @@ Examples include:
 - Development patterns that improve productivity.
 
 These lessons are intended to improve both the Cocktail AI App and future software projects.
+
+---
+
+# Verified Capabilities
+
+The following capabilities have been demonstrated through practical testing.
+
+| Capability | Status | Last Verified |
+|------------|--------|---------------|
+| Repository connection | ✅ | 2026-07-14 |
+| Repository metadata | ✅ | 2026-07-14 |
+| File content retrieval | ❌ | 2026-07-14 |
+| Repository search | ❌ | 2026-07-14 |
+| Repository modification | ❌ | 2026-07-14 |
+| Pull Request creation | ❌ | 2026-07-14 |
+
+This table records observed behaviour rather than expected functionality and will be updated as new capabilities are verified.
