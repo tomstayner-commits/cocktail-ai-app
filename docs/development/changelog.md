@@ -13,15 +13,22 @@ and this project follows
 
 ### Planned
 
-- Complete service layer refactoring
-- Environment-based configuration
+- Configuration validation and configurable logging
+- Expanded API and service-layer regression coverage
 - Improved exception handling
-- Automated testing with pytest
 - Docker support
 - AWS deployment
 - Amazon S3 image management
 - Insights and analytics dashboard
 - AI-powered cocktail recommendations
+
+### Added
+
+- Browser favicon served at `/favicon.ico`.
+
+### Changed
+
+- Reorganised documentation and repaired internal navigation after file moves.
 
 ---
 

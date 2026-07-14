@@ -125,8 +125,9 @@ Only recommend changes that improve future engineering across the repository. Do
 
 When implementing a completed feature:
 
-- Update CHANGELOG.md if the feature changes application behaviour, architecture or developer workflows.
+- Update the [changelog](docs/development/changelog.md) if the feature changes application behaviour, architecture or developer workflows.
 - Update the roadmap if milestones change.
 - Update architecture documentation if project structure changes.
 - Update setup.md if installation or configuration changes.
 - Keep README concise; avoid duplicating detailed documentation.
+- When documentation files are moved or renamed, update all inbound and outbound Markdown links and verify that local documentation links resolve.

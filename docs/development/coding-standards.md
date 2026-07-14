@@ -14,7 +14,7 @@ AI-assisted development follows the same standards and approval requirements. Fo
 
 ## Changelog
 
-All notable user-visible or architectural changes should be recorded in `CHANGELOG.md`.
+All notable user-visible or architectural changes should be recorded in the [changelog](changelog.md).
 
 When completing a feature:
 

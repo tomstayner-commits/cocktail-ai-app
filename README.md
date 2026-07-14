@@ -31,10 +31,10 @@ For prerequisites, AWS credentials, environment configuration, and available end
 Additional project documentation can be found in the `docs/` directory.
 
 - [Setup Guide](docs/setup.md)
-- [Project Roadmap](docs/roadmap.md)
+- [Product Roadmap](docs/roadmap.md)
 - [Architecture Overview](docs/architecture/overview.md)
 - [Coding Standards](docs/development/coding-standards.md)
 - [Engineering Log](docs/development/engineering-log.md)
-- [Changelog](CHANGELOG.md)
+- [Changelog](docs/development/changelog.md)
 
 Repository engineering governance is defined in [AGENTS.md](AGENTS.md).
