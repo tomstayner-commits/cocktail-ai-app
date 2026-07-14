@@ -9,45 +9,31 @@ and this project follows
 
 ---
 
-## [Unreleased]
-
-### Added
-
-- Browser favicon served at `/favicon.ico`.
-
-### Changed
-
-- Reorganised documentation and repaired internal navigation after file moves.
-- Routed all HTML cocktail views through the service layer, removing direct DynamoDB access from route handlers.
-
----
-
 ## [0.3.0] - 2026-07-14
 
 ### Added
-
 - Modular project structure with dedicated modules for database, models and logging.
 - Structured application logging with both console and file output.
 - Professional project documentation, including setup, architecture and roadmap guides.
 - MIT License.
 - Public GitHub repository.
 - `.env.example` configuration template.
+- Browser favicon served at `/favicon.ico`.
 
 ### Changed
-
 - Refactored the application from a single-file implementation towards a modular architecture.
-- Introduced a service layer to progressively separate business logic from FastAPI route handlers.
-- Reorganised documentation into a dedicated `docs/` hierarchy.
+- Completed the service layer architecture, with all HTML and JSON routes now delegating business logic to `cocktail_service`.
+- Database access is now encapsulated within the service layer and database module.
+- Reorganised project documentation into a structured `docs/` hierarchy.
+- Repaired internal documentation navigation following the documentation restructure.
 - Improved README to serve as a concise project landing page.
 
 ### Infrastructure
-
 - AWS DynamoDB configuration isolated into a dedicated database module.
 - Logging configuration extracted into a reusable module.
 - Project prepared for future environment-based configuration.
 
 ### Documentation
-
 - Added engineering log.
 - Added coding standards.
 - Added architecture documentation.
