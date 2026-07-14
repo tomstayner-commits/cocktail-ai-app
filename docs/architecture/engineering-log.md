@@ -2,12 +2,11 @@
 
 ## 2026-07-14
 
-### Implemented
-- Added a health endpoint at `/health` for basic service monitoring.
-- Moved cocktail CRUD logic behind the service layer to improve maintainability.
-- Added regression tests covering the health endpoint and the cocktail collection route.
-- Documented the evolving architecture and roadmap in the architecture docs.
+- Added a health endpoint for basic service monitoring.
+- Moved cocktail CRUD logic behind a service layer to improve separation of concerns.
+- Added regression tests for the health endpoint and cocktail collection route.
+- Refined the architecture documentation to match the current implementation more closely.
 
-### Notes
-- The current application remains locally oriented while the long-term target architecture is AWS-serverless.
-- Future work should focus on configuration management, error handling, and deployment automation.
+## Notes
+
+The project remains intentionally simple at this stage while the architecture is being established for future cloud and AI expansion.

@@ -30,15 +30,9 @@ Current features include:
 
 ## Architecture
 
-```text
-            Browser
-               │
-               ▼
-      FastAPI (Uvicorn)
-               │
-               ▼
-      AWS DynamoDB Table
-```
+The current implementation is a FastAPI application with a service layer and a DynamoDB-backed data store.
+
+For a concise architecture overview, see [docs/architecture/overview.md](docs/architecture/overview.md).
 
 ---
 
@@ -210,23 +204,12 @@ Connection information is supplied through environment variables and is **not** 
 
 ---
 
-## Repository Structure
+## Documentation
 
-```text
-cocktail-ai-app/
-│
-├── src/
-│   ├── main.py
-│   ├── database.py
-│   ├── logging_config.py
-│   ├── models.py
-│   └── static/
-│       └── main.css
-│
-├── logs/
-├── .env.example
-├── .gitignore
-├── LICENSE
-├── README.md
-└── requirements.txt
-```
+- [docs/setup.md](docs/setup.md) for local setup steps
+- [docs/architecture/overview.md](docs/architecture/overview.md) for the current architecture
+- [docs/architecture/aws.md](docs/architecture/aws.md) for AWS-related notes
+- [docs/architecture/deployment.md](docs/architecture/deployment.md) for deployment status
+- [docs/architecture/data-model.md](docs/architecture/data-model.md) for the current data model
+- [docs/architecture/roadmap.md](docs/architecture/roadmap.md) for planned work
+- [docs/architecture/engineering-log.md](docs/architecture/engineering-log.md) for implementation notes

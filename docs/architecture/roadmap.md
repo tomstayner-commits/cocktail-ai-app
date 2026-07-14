@@ -1,16 +1,17 @@
 # Roadmap
 
-## Phase 0 — Foundation
-- Completed: establish repository structure and documentation.
-- Completed: add a FastAPI application with HTML and JSON routes.
-- Completed: introduce a service layer for cocktail operations.
+## Current phase
 
-## Phase 1 — Reliability and Quality
-- Add configuration management with environment-based settings.
-- Improve error handling and validation for API requests.
-- Expand automated tests around service and route behavior.
+The project is in an early implementation phase focused on a maintainable backend foundation.
 
-## Phase 2 — Cloud and AI
-- Deploy the app to AWS with serverless components.
-- Integrate AI-based cocktail recommendations and search assistance.
-- Add image storage and richer user experiences.
+## Near-term goals
+
+- strengthen API validation and error handling
+- add more automated tests around the service layer
+- introduce environment-based configuration
+
+## Medium-term goals
+
+- deploy the application to AWS
+- add AI-assisted cocktail recommendations
+- introduce richer cocktail metadata and media support
