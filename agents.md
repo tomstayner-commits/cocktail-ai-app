@@ -1,44 +1,32 @@
-# Cocktail AI App - Engineering Constitution
+# Cocktail AI App
 
-## Project Mission
+## Mission
 
-Cocktail AI App is a professional Cloud & AI Engineering portfolio project.
+Cocktail AI App is a Cloud & AI Engineering portfolio project.
 
-The objective is not merely to build a cocktail recipe application, but to demonstrate modern software engineering practices including:
+The objective is to demonstrate professional software engineering practices while building a production-quality cloud-native cocktail application using AWS and AI.
 
-- AWS Serverless Architecture
-- Artificial Intelligence integration
-- Clean Architecture
-- Cloud-native development
-- Modern DevOps
-- Professional documentation
-
-Every change should improve the project as a portfolio-quality engineering showcase.
+Code quality, maintainability and documentation are considered features.
 
 ---
 
-## Engineering Philosophy
+## Primary Responsibilities
 
-Documentation is a first-class deliverable.
+When implementing features:
 
-Code should be readable before being clever.
-
-Prefer maintainability over optimisation.
-
-Prefer small incremental changes.
-
-Always consider whether architecture documentation should be updated.
+- Write maintainable code.
+- Keep documentation synchronized.
+- Preserve architectural consistency.
+- Prefer small incremental improvements.
+- Explain significant design decisions.
 
 ---
 
-## Technology Direction
+## Technology Stack
 
 Backend
 - Python
 - FastAPI
-
-Frontend
-- React (planned)
 
 Cloud
 - AWS
@@ -50,29 +38,27 @@ Authentication
 - Amazon Cognito (planned)
 
 AI
-- OpenAI APIs
+- OpenAI API (planned)
+
+Frontend
+- React (planned)
 
 ---
 
-## Documentation
+## Documentation Philosophy
 
-When implementing features, consider whether these should also be updated:
+Documentation should always reflect the current implementation.
 
-README.md
+Update documentation only when changes materially affect:
 
-docs/architecture/overview.md
+- architecture
+- deployment
+- AWS resources
+- data model
+- AI integration
+- roadmap
 
-docs/architecture/aws.md
-
-docs/architecture/services.md
-
-docs/architecture/data-model.md
-
-docs/architecture/deployment.md
-
-docs/architecture/roadmap.md
-
-docs/architecture/engineering-log.md
+Avoid unnecessary documentation churn.
 
 ---
 
@@ -82,44 +68,18 @@ Use type hints.
 
 Use structured logging.
 
-Keep functions small.
+Write regression tests.
 
-Prefer composition over inheritance.
+Keep services small.
 
-Avoid duplicated code.
-
-Write tests for new functionality.
-
-Run formatting before completion.
+Prefer readability over cleverness.
 
 ---
 
-## AI Behaviour
+## Engineering Principle
 
 Think like a Senior Cloud Engineer.
 
-Explain significant architectural decisions.
+Do not implement features in isolation.
 
-Prefer complete solutions over isolated code snippets.
-
-When appropriate, suggest documentation updates.
-
-Always consider long-term maintainability.
-
----
-
-Every feature should include:
-
-✓ Documentation
-
-✓ Tests
-
-✓ Logging
-
-✓ Type hints
-
-✓ Error handling
-
-✓ Roadmap update (if required)
-
-✓ Engineering Log update (if required)
+Consider the impact on architecture, documentation, deployment and testing before completing work.
