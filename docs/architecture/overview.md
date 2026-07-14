@@ -11,6 +11,26 @@ The project is currently a Python FastAPI application with:
 - DynamoDB as the persistence layer, configured through `AWS_REGION` and `TABLE_NAME`
 - static CSS and a browser favicon served by the application
 
+## Architecture Diagram
+
+```mermaid
+flowchart TD
+
+    Browser["🌐 Browser / API Client"]
+
+    Browser --> FastAPI["FastAPI Route Handlers"]
+
+    FastAPI --> Service["Cocktail Service"]
+
+    Service --> Database["Database Module"]
+
+    Database --> DynamoDB["AWS DynamoDB"]
+
+    FastAPI --> HTML["HTML Rendering"]
+
+    HTML --> Browser
+```
+
 ## Future Direction
 
 The long-term direction is a cloud-native, AWS-based application with AI-assisted features. The current implementation is intentionally small and local-first so the core architecture can evolve without unnecessary complexity.
