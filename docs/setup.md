@@ -1,29 +1,40 @@
 # Local Setup
 
-This document is the detailed local setup guide. For a project overview and quick start, see the [README](../README.md).
+This document is the authoritative guide for running Cocktail AI App locally. For a concise quick start, see the [README](../README.md).
 
 ## Prerequisites
 
 - Python 3.14+
-- a virtual environment
+- A virtual environment
 - AWS credentials available through the standard AWS credential provider chain
-- access to the DynamoDB table configured by environment variables
+- Access to the DynamoDB table configured for the application
 
-## Local setup
+## Install and Run
 
 1. Create and activate a virtual environment.
 2. Install dependencies with `pip install -r requirements.txt`.
-3. Create a `.env` file in the project root with:
-   - `AWS_REGION`
-   - `TABLE_NAME`
+3. Copy the environment template with `Copy-Item .env.example .env` on Windows or `cp .env.example .env` on Linux or macOS.
+4. Set the required variables in `.env`:
+
+   ```text
+   AWS_REGION=ap-southeast-2
+   TABLE_NAME=Cocktails
+   ```
+
    `LOG_LEVEL` may remain in the template for future use, but the current application logs at `INFO` and does not read it.
-4. Start the app from the project root with `uvicorn src.main:app --reload`.
+5. From the project root, start the application with `uvicorn src.main:app --reload`.
 
-## Useful endpoints
+## Local Endpoints
 
-- `/` for the HTML landing page
-- `/health` for a basic health check
-- `/docs` for the Swagger UI
-- `/favicon.ico` for the browser favicon
+- `/` — HTML landing page
+- `/health` — basic health check
+- `/docs` — Swagger UI
+- `/favicon.ico` — browser favicon
 
-See the [deployment notes](architecture/deployment.md) for the current operating model.
+## Configuration and Security
+
+Connection settings are supplied through environment variables and are not stored in the repository. Do not commit `.env`, AWS credentials, API keys, or passwords.
+
+The application uses the standard AWS credential provider chain to access DynamoDB and does not currently configure a local DynamoDB endpoint.
+
+See [deployment notes](architecture/deployment.md) for the current operating model and [coding standards](development/coding-standards.md) for delivery expectations.
