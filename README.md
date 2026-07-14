@@ -28,13 +28,13 @@ For prerequisites, AWS credentials, environment configuration, and available end
 
 ## Documentation
 
-- [Local setup](docs/setup.md)
-- [Product roadmap](docs/roadmap.md)
-- [Architecture overview](docs/architecture/overview.md)
-- [AWS architecture](docs/architecture/aws.md)
-- [Deployment](docs/architecture/deployment.md)
-- [Data model](docs/architecture/data-model.md)
-- [Coding standards](docs/development/coding-standards.md)
-- [Engineering log](docs/development/engineering-log.md)
+Additional project documentation can be found in the `docs/` directory.
+
+- [Setup Guide](docs/setup.md)
+- [Project Roadmap](docs/roadmap.md)
+- [Architecture Overview](docs/architecture/overview.md)
+- [Coding Standards](docs/development/coding-standards.md)
+- [Engineering Log](docs/development/engineering-log.md)
+- [Changelog](CHANGELOG.md)
 
 Repository engineering governance is defined in [AGENTS.md](AGENTS.md).
