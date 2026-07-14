@@ -109,3 +109,29 @@ Before completing a task:
 - Logging and error handling have been considered.
 - The implementation is consistent with the project architecture.
 - Summarise the changes and any important design decisions.
+
+---
+
+## Engineering Workflow
+
+For significant changes:
+
+1. Review the current implementation.
+2. Identify affected components.
+3. Produce a brief implementation plan.
+4. Implement the change.
+5. Update affected documentation.
+6. Verify the implementation.
+7. Summarise the work completed.
+
+---
+
+## Pragmatism
+
+Do not introduce unnecessary abstraction.
+
+Do not create documentation unless it adds value.
+
+Prefer improving existing files over creating new ones.
+
+Avoid speculative architecture that is not justified by current or planned requirements.
