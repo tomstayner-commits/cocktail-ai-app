@@ -6,7 +6,7 @@ Cocktail AI App is a Cloud & AI Engineering portfolio project.
 
 The objective is to demonstrate professional software engineering practices while building a production-quality cloud-native cocktail application using AWS and AI.
 
-Code quality, maintainability and documentation are considered features.
+Code quality, maintainability, and documentation are considered features.
 
 ---
 
@@ -24,24 +24,12 @@ When implementing features:
 
 ## Technology Stack
 
-Backend
-- Python
-- FastAPI
-
-Cloud
-- AWS
-
-Database
-- DynamoDB
-
-Authentication
-- Amazon Cognito (planned)
-
-AI
-- OpenAI API (planned)
-
-Frontend
-- React (planned)
+- Backend: Python, FastAPI
+- Cloud: AWS
+- Database: DynamoDB
+- Authentication: Amazon Cognito (planned)
+- AI: OpenAI API (planned)
+- Frontend: React (planned)
 
 ---
 
@@ -64,15 +52,11 @@ Avoid unnecessary documentation churn.
 
 ## Coding Standards
 
-Use type hints.
-
-Use structured logging.
-
-Write regression tests.
-
-Keep services small.
-
-Prefer readability over cleverness.
+- Use type hints.
+- Use structured logging.
+- Write regression tests.
+- Keep services small.
+- Prefer readability over cleverness.
 
 ---
 
@@ -92,7 +76,7 @@ When working on this repository:
 
 - Think like an experienced software engineer.
 - Consider the impact of changes across the whole project.
-- Review related code, documentation, configuration and tests before implementing changes.
+- Review related code, documentation, configuration, and tests before implementing changes.
 - Explain significant architectural decisions before implementing them.
 - Prefer maintainable solutions over clever ones.
 - Verify your work before considering a task complete.
@@ -108,7 +92,7 @@ Before completing a task:
 - Documentation has been reviewed and updated if required.
 - Logging and error handling have been considered.
 - The implementation is consistent with the project architecture.
-- Summarise the changes and any important design decisions.
+- Summarize the changes and any important design decisions.
 
 ---
 
