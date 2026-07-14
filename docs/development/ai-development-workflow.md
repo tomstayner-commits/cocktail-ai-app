@@ -4,6 +4,29 @@ This project is developed using an AI-assisted software engineering workflow.
 
 AI tools are used to assist with architecture, implementation, documentation and testing, while all product direction, design decisions, code review and final approval remain the responsibility of the project owner.
 
+## Roles and Responsibilities
+
+### Human
+
+| Role | Responsibility |
+|------|----------------|
+| **Tom Stayner** | Product Owner, Engineering Lead, Final Reviewer |
+
+### AI Assistants
+
+| Role | Responsibility |
+|------|----------------|
+| **ChatGPT** | Software Architecture, Technical Mentoring, Documentation, Design Reviews |
+| **Codex** | Feature Implementation, Refactoring, Test Development, Documentation Maintenance |
+
+### Engineering Tools
+
+| Tool | Responsibility |
+|------|----------------|
+| **GitHub** | Version Control, Issues, Discussions, Releases |
+| **Pytest** | Regression Verification |
+| **Ruff / Black** | Static Analysis, Code Formatting and Style Enforcement |
+
 ## Development Feedback Loop Diagram
 
 ```mermaid
