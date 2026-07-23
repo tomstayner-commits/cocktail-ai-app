@@ -7,6 +7,20 @@ The format is based on the principles of
 and this project follows
 [Semantic Versioning](https://semver.org/).
 
+## [0.4.0] - 2026-07-23
+
+### Added
+
+- Separate liveness and DynamoDB readiness health endpoints.
+- Readiness checks return HTTP 503 when DynamoDB is unavailable.
+
+### Changed
+
+- Preserved `/health` as a backward-compatible liveness endpoint.
+- Successful health checks no longer generate application INFO logs.
+
+---
+
 ## [0.3.0] - 2026-07-14
 
 ### Added
