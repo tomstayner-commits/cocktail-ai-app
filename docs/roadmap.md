@@ -56,3 +56,4 @@ These ideas should be assessed against user value, engineering complexity, data 
 Across all milestones, the project aims to demonstrate clean, maintainable architecture; AWS best practices; thoughtful AI integration; automated testing; clear documentation; and continuous improvement. Detailed implementation tasks belong in issue tracking or milestone plans, not in this roadmap.
 
 See [AWS architecture](architecture/aws.md), [deployment](architecture/deployment.md), and [AGENTS.md](../AGENTS.md) for related guidance.
+   

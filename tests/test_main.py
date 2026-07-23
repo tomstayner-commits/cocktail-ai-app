@@ -6,11 +6,96 @@ from src.main import app
 client = TestClient(app)
 
 
-def test_health_endpoint_returns_ok(monkeypatch):
+def test_legacy_health_endpoint_remains_compatible():
     response = client.get("/health")
 
     assert response.status_code == 200
     assert response.json() == {"status": "ok"}
+
+
+def test_liveness_endpoint_returns_healthy():
+    response = client.get("/health/live")
+
+    assert response.status_code == 200
+    assert response.json() == {
+        "status": "healthy",
+        "service": app.title,
+        "version": app.version,
+    }
+
+
+def test_liveness_endpoint_does_not_check_dynamodb(monkeypatch):
+    def fail_if_called() -> bool:
+        raise AssertionError("Liveness must not check DynamoDB")
+
+    monkeypatch.setattr(
+        "src.main.health_service.is_dynamodb_ready",
+        fail_if_called,
+    )
+
+    response = client.get("/health/live")
+
+    assert response.status_code == 200
+
+
+def test_legacy_health_endpoint_does_not_check_dynamodb(monkeypatch):
+    def fail_if_called() -> bool:
+        raise AssertionError("Legacy health must not check DynamoDB")
+
+    monkeypatch.setattr(
+        "src.main.health_service.is_dynamodb_ready",
+        fail_if_called,
+    )
+
+    response = client.get("/health")
+
+    assert response.status_code == 200
+    assert response.json() == {"status": "ok"}
+
+
+def test_readiness_endpoint_returns_200_when_dynamodb_is_ready(monkeypatch):
+    monkeypatch.setattr(
+        "src.main.health_service.is_dynamodb_ready",
+        lambda: True,
+    )
+
+    response = client.get("/health/ready")
+
+    assert response.status_code == 200
+    assert response.json() == {
+        "status": "healthy",
+        "service": app.title,
+        "version": app.version,
+        "dependencies": {
+            "dynamodb": {
+                "status": "healthy",
+            }
+        },
+    }
+
+
+def test_readiness_endpoint_returns_503_when_dynamodb_is_unavailable(
+    monkeypatch,
+):
+    monkeypatch.setattr(
+        "src.main.health_service.is_dynamodb_ready",
+        lambda: False,
+    )
+
+    response = client.get("/health/ready")
+
+    assert response.status_code == 503
+    assert response.json() == {
+        "status": "unhealthy",
+        "service": app.title,
+        "version": app.version,
+        "dependencies": {
+            "dynamodb": {
+                "status": "unhealthy",
+            }
+        },
+    }
+    assert "detail" not in response.json()
 
 
 def test_openapi_version_matches_current_release():

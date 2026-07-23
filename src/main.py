@@ -4,10 +4,13 @@
 
 from fastapi import FastAPI
 from fastapi import HTTPException
+from fastapi import status
 from fastapi.responses import FileResponse
 from fastapi.responses import HTMLResponse
+from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
 
+from src import health_service
 from src.logging_config import logger
 from src.models import Cocktail
 from src.services import cocktail_service
@@ -91,10 +94,40 @@ def favicon() -> FileResponse:
 
 @app.get("/health")
 def health_check() -> dict[str, str]:
-
-    logger.info("[API] Health check requested")
-
     return {"status": "ok"}
+
+
+@app.get("/health/live")
+def liveness_check() -> dict[str, str]:
+    return {
+        "status": "healthy",
+        "service": app.title,
+        "version": app.version,
+    }
+
+
+@app.get("/health/ready", response_model=None)
+def readiness_check() -> dict[str, object] | JSONResponse:
+    ready = health_service.is_dynamodb_ready()
+    dependency_status = "healthy" if ready else "unhealthy"
+    response = {
+        "status": dependency_status,
+        "service": app.title,
+        "version": app.version,
+        "dependencies": {
+            "dynamodb": {
+                "status": dependency_status,
+            }
+        },
+    }
+
+    if not ready:
+        return JSONResponse(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            content=response,
+        )
+
+    return response
 
 
 @app.get("/", response_class=HTMLResponse)
